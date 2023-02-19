@@ -1,3 +1,4 @@
+#include <iostream>
 #include <thread>
 #include <conio.h>
 #include "net.h"
@@ -29,7 +30,7 @@ int main(void) {
 			<< '\n'
 			<< "Server mode\n";
 
-		net::server s;
+		net::server s(7474);
 		std::thread nc_t(new_client, s);
 		nc_t.join();
 
@@ -40,7 +41,7 @@ int main(void) {
 			<< '\n'
 			<< "Client mode\n";
 
-		net::client c;
+		net::client c(7474);
 		std::string message = c.recv();
 		std::cout << message << '\n';
 

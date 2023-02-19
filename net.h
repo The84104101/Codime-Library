@@ -35,7 +35,8 @@ namespace net {
 
 		int sc_number = 0;
 	public:
-		server() {
+		server(int _port = 7474) {
+			socket_address.sin_port = _port;
 			socket_listen = socket(AF_INET, SOCK_STREAM, NULL);
 			bind(socket_listen, (SOCKADDR*)&socket_address, sizeof(socket_address));
 			listen(socket_listen, SOMAXCONN);
@@ -56,7 +57,6 @@ namespace net {
 			::recv(socket_client[_sc_number], message, 256, NULL);
 			return message;
 		}
-		
 		~server() {
 
 		}
@@ -66,7 +66,8 @@ namespace net {
 	private:
 		SOCKET socket_client;
 	public:
-		client() {
+		client(int _port = 7474) {
+			socket_address.sin_port = _port;
 			socket_client = socket(AF_INET, SOCK_STREAM, NULL);
 			if (connect(socket_client, (SOCKADDR*)&socket_address, sizeof(socket_address))) {
 				std::cout << "Client has not connection";
