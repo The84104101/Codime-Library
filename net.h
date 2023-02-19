@@ -51,11 +51,10 @@ namespace net {
 			::send(socket_client[_sc_number], _message, 256, NULL);
 			return;
 		}
-		void recv(int _sc_number) {
+		char* recv(int _sc_number) {
 			char message[256];
-			::recv(socket_client[_sc_number], message, sizeof(message), NULL);
-			std::cout << message << '\n';
-			return;
+			::recv(socket_client[_sc_number], message, 256, NULL);
+			return message;
 		}
 		
 		~server() {
@@ -74,14 +73,13 @@ namespace net {
 			}
 		}
 		void send(char message[256]) {
-			::send(socket_client, message, sizeof(message), NULL);
+			::send(socket_client, message, 256, NULL);
 			return;
 		}
-		void recv() {
+		char* recv() {
 			char message[256];
-			::recv(socket_client, message, sizeof(message), NULL);
-			std::cout << message << '\n';
-			return;
+			::recv(socket_client, message, 256, NULL);
+			return message;
 		}
 		~client() {
 
